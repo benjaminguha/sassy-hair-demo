@@ -1,0 +1,1050 @@
+// app.jsx
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/layout/Header.jsx';
+import Home from './pages/Home.jsx';
+import Services from './pages/Services.jsx';
+import Stylists from './pages/Stylists.jsx';
+import Photos from './pages/Photos.jsx';
+import ContactUs from './pages/ContactUs.jsx';
+import WorkWithUs from './pages/WorkWithUs.jsx';
+import { Box } from '@mui/material';
+
+function App() {
+  return (
+    <Router>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Header />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            
+            // ADD THE BACKGROUND COLOR AND PADDING HERE
+            backgroundColor: '#FCEFF9',
+            p: { xs: 2, md: 4 }, // p: stands for padding on all sides
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/stylists" element={<Stylists />} />
+            <Route path="/photos" element={<Photos />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/work-with-us" element={<WorkWithUs />} />
+          </Routes>
+        </Box>
+      </Box>
+    </Router>
+  );
+}
+
+export default App;
+
+//main.jsx
+// src/main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css'; // Keep this for global styles if needed
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme/theme.js';
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
+);
+
+//footerDesktop.jsx
+import { Typography } from "@mui/material";
+import React from "react";
+
+
+function FooterDesktop({navItems}){
+    return(
+        <Typography>All RIghts Reserved Sassy Hair co 2025</Typography>
+    );
+}
+
+export default FooterDesktop;
+
+//footermobile.jsx
+import { Typography } from "@mui/material";
+import React from "react";
+
+
+function FooterMobile({navItems}){
+    return(
+        <Typography>All RIghts Reserved Sassy Hair co 2025</Typography>
+    );
+}
+
+export default FooterMobile;
+
+//headerDesktop.jsx
+// src/components/header/HeaderDesktop.jsx
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+
+// It receives the navigation items as a 'prop' from the handler
+function HeaderDesktop({ navItems }) {
+  return (
+    <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 1 }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black' }}>
+          Sassy Hair
+        </Typography>
+
+        <Box sx={{ display: 'flex' }}>
+          {navItems.map((item) => (
+            <Button
+              key={item.label}
+              component={Link}
+              to={item.path}
+              sx={{ color: 'black', mx: 1 }}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </Box>
+
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ ml: 2, borderRadius: '20px' }}
+          href='https://app.salonrunner.com/customer/login.htm?id=27134'
+        >
+          Book Online
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+}
+
+export default HeaderDesktop;
+
+//headerMobile.jsx
+// src/components/header/HeaderMobile.jsx
+import React, { useState } from 'react';
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Box
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+
+// It also receives the navigation items as a 'prop'
+function HeaderMobile({ navItems }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        Sassy Hair
+      </Typography>
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.label} component={Link} to={item.path}>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <>
+      <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 1 }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <IconButton
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ color: 'black' }}
+          >
+            <MenuIcon />
+          </IconButton>
+          
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black' }}>
+          Sassy Hair
+            </Typography>
+
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ borderRadius: '20px'
+             }}
+             href='https://app.salonrunner.com/customer/login.htm?id=27134'
+          >
+            Book Online
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer
+        variant="temporary"
+        open={mobileMenuOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: 'block',
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+        }}
+      >
+        {drawer}
+      </Drawer>
+    </>
+  );
+}
+
+export default HeaderMobile;
+
+footer.jsx
+// src/components/Header.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate header views
+
+import FooterMobile from './footer/FooterMobile';
+import FooterDesktop from './footer/FooterDesktop';
+
+// 1. Define the navigation data in one central place
+const navItems = [
+  { label: 'Home', path: '/' },
+  { label: 'Services', path: '/services' },
+  { label: 'Stylists', path: '/stylists' },
+  { label: 'Photos', path: '/photos' },
+  { label: 'Contact Us', path: '/contact' },
+  { label: 'Work With Us', path: '/work-with-us' },
+];
+
+function Footer() {
+  const theme = useTheme();
+  // 2. Check for screen size
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // 3. Render the correct component and pass the navItems data as a prop
+  return isMobile 
+    ? <FooterMobile navItems={navItems} /> 
+    : <FooterDesktop navItems={navItems} />;
+}
+
+export default Footer;
+
+Header.jsx
+// src/components/Header.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate header views
+import HeaderDesktop from './header/HeaderDesktop';
+import HeaderMobile from './header/HeaderMobile';
+
+// 1. Define the navigation data in one central place
+const navItems = [
+  { label: 'Home', path: '/' },
+  { label: 'Services', path: '/services' },
+  { label: 'Stylists', path: '/stylists' },
+  { label: 'Photos', path: '/photos' },
+  { label: 'Contact Us', path: '/contact' },
+  { label: 'Work With Us', path: '/work-with-us' },
+];
+
+function Header() {
+  const theme = useTheme();
+  // 2. Check for screen size
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // 3. Render the correct component and pass the navItems data as a prop
+  return isMobile 
+    ? <HeaderMobile navItems={navItems} /> 
+    : <HeaderDesktop navItems={navItems} />;
+}
+
+export default Header;
+
+AboutDesktop.jsx
+
+AboutMobile.jsx
+
+ContactUsDesktop.jsx
+// src/pages/home/HomeDesktop.jsx
+import React from 'react';
+import { Typography, Grid, Box } from '@mui/material';
+
+function ContactUsDesktop() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={4} alignItems="center">
+        {/* --- Left Column (Text) --- */}
+        <Grid item md={6}>
+          <Typography variant="h2" component="h1" gutterBottom>
+            Welcome to Sassy Hair
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+          </Typography>
+        </Grid>
+
+        {/* --- Right Column (Image Placeholder) --- */}
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: '100%',
+              height: 400,
+              backgroundColor: 'grey.200',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h6" color="text.secondary">
+              Main Photo Placeholder
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+
+export default ContactUsDesktop;
+
+ContactUsMobile.jsx
+// src/pages/home/HomeMobile.jsx
+import React from 'react';
+import { Typography, Stack, Box } from '@mui/material';
+
+function ContactUsMobile() {
+  return (
+    // Stack is great for simple, one-directional layouts
+    <Stack spacing={4}>
+      {/* --- Image Placeholder (often comes first on mobile) --- */}
+      <Box
+        sx={{
+          width: '100%',
+          height: 300,
+          backgroundColor: 'grey.200',
+          borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          Main Photo Placeholder
+        </Typography>
+      </Box>
+
+      {/* --- Text Content --- */}
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Welcome to Sassy Hair
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+        </Typography>
+      </Box>
+    </Stack>
+  );
+}
+
+export default ContactUsMobile;
+
+HomeMobile.jsx
+// src/pages/home/HomeMobile.jsx
+import React from 'react';
+import { Typography, Paper, Box, Stack } from '@mui/material';
+
+import Carousel from 'react-bootstrap/Carousel';
+
+function HomeMobile() {
+  return (
+    <Box sx={{ width: '95%', mt: 4 }}>
+      <Paper elevation={3} sx={{ borderRadius: '16px', overflow: 'hidden' }}>
+        {/* ==================== HERO SECTION START ==================== */}
+        <Box
+          sx={{
+            position: 'relative',
+            height: '350px',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundImage: `url('https://images.pexels.com/photos/267961/pexels-photo-267961.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`,
+          }}
+        >
+          {/* Solid overlay for mobile to ensure readability */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(255, 255, 255, 0.85)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              p: 2,
+            }}
+          >
+            <Stack spacing={2} alignItems="center">
+              {/* --- Logo Placeholder --- */}
+              <Carousel>
+                
+              </Carousel>
+              {/* --- Text Content --- */}
+              <Typography variant="h4" component="h1" sx={{ fontFamily: '"Lucida Handwriting", cursive' }}>
+                  We are Sassy!
+                </Typography>
+                <Typography variant="h8x" component="p">
+                  Exceptionally Trained And Award Winning Stylists.
+                  <br />
+                  Unparalleled Service.
+                  <br/>
+                   Every Time.
+                </Typography>
+            </Stack>
+          </Box>
+        </Box>
+        {/* ===================== HERO SECTION END ===================== */}
+
+        {/* Previous content starts here */}
+        <Box sx={{ p: 3 }}>
+          <Stack spacing={3}>
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom sx={{ fontFamily: '"Lucida Handwriting", cursive' }}>
+                About
+              </Typography>
+              <Typography variant="body1" color="text.secondary" paragraph>
+              Styles, trends, and fashions are forever changing, and advances in hair treatments and equipment are continually improving. At Sassy Hair, we aim to combine the very best Keune products with our highly skilled and trained stylists to remain at the very cutting edge.
+              <br/>
+              <br/>
+              Our mission is to build long-lasting friendships with you, our fabulous clients. We listen, we’re attentive, and we want nothing more than for you to leave our salons feeling happy, vibrant and loving your new look. And, having opened salons in Weston, Hawker and Pearce we’re sure you’ll find a salon near you.
+              <br/>
+              <br/>
+              
+              <b>Established in 2005, we have a long and proud association with the Canberra region.</b>
+              </Typography>
+            </Box>
+            <Box
+              component="img"
+              src="https://placehold.co/600x400/d90166/white?text=Keune+Products"
+              alt="Keune hair products"
+              sx={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: '12px',
+              }}
+            />
+          </Stack>
+        </Box>
+      </Paper>
+    </Box>
+  );
+}
+
+export default HomeMobile;
+
+HomeDeskTop.jsx
+// src/pages/home/HomeDesktop.jsx
+import React from 'react';
+import { Typography, Grid, Paper, Box } from '@mui/material';
+
+
+
+function HomeDesktop() {
+  return (
+    <Box sx={{ width: '85%', mt: 4, paddingTop: '75px' }}>
+      <Paper elevation={3} sx={{ borderRadius: '16px', overflow: 'hidden' }}>
+        {/* ==================== HERO SECTION START ==================== */}
+        
+      </Paper>
+    </Box>
+  );
+}
+
+export default HomeDesktop;
+
+
+PhotosDesktop.jsx
+// src/pages/home/HomeDesktop.jsx
+import React from 'react';
+import { Typography, Grid, Box } from '@mui/material';
+
+function PhotosDesktop() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={4} alignItems="center">
+        {/* --- Left Column (Text) --- */}
+        <Grid item md={6}>
+          <Typography variant="h2" component="h1" gutterBottom>
+            Welcome to Sassy Hair
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+          </Typography>
+        </Grid>
+
+        {/* --- Right Column (Image Placeholder) --- */}
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: '100%',
+              height: 400,
+              backgroundColor: 'grey.200',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h6" color="text.secondary">
+              Main Photo Placeholder
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+
+export default PhotosDesktop;
+
+PhoneMobile.jsx
+// src/pages/home/HomeMobile.jsx
+import React from 'react';
+import { Typography, Stack, Box } from '@mui/material';
+
+function PhotosMobile() {
+  return (
+    // Stack is great for simple, one-directional layouts
+    <Stack spacing={4}>
+      {/* --- Image Placeholder (often comes first on mobile) --- */}
+      <Box
+        sx={{
+          width: '100%',
+          height: 300,
+          backgroundColor: 'grey.200',
+          borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          Main Photo Placeholder
+        </Typography>
+      </Box>
+
+      {/* --- Text Content --- */}
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Welcome to Sassy Hair
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+        </Typography>
+      </Box>
+    </Stack>
+  );
+}
+
+export default PhotosMobile;
+
+ServicesDesktop.jsx
+// src/pages/home/HomeDesktop.jsx
+import React from 'react';
+import { Typography, Grid, Box } from '@mui/material';
+
+function ServicesDesktop() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={4} alignItems="center">
+        {/* --- Left Column (Text) --- */}
+        <Grid item md={6}>
+          <Typography variant="h2" component="h1" gutterBottom>
+            Welcome to Sassy Hair
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+          </Typography>
+        </Grid>
+
+        {/* --- Right Column (Image Placeholder) --- */}
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: '100%',
+              height: 400,
+              backgroundColor: 'grey.200',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h6" color="text.secondary">
+              Main Photo Placeholder
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+
+export default ServicesDesktop;
+
+ServicesMobile.jsx
+// src/pages/home/HomeMobile.jsx
+import React from 'react';
+import { Typography, Stack, Box } from '@mui/material';
+
+function ServicesMobile() {
+  return (
+    // Stack is great for simple, one-directional layouts
+    <Stack spacing={4}>
+      {/* --- Image Placeholder (often comes first on mobile) --- */}
+      <Box
+        sx={{
+          width: '100%',
+          height: 300,
+          backgroundColor: 'grey.200',
+          borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          Main Photo Placeholder
+        </Typography>
+      </Box>
+
+      {/* --- Text Content --- */}
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Welcome to Sassy Hair
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+        </Typography>
+      </Box>
+    </Stack>
+  );
+}
+
+export default ServicesMobile;
+
+StylistsDesktop.jsx
+// src/pages/home/HomeDesktop.jsx
+import React from 'react';
+import { Typography, Grid, Box } from '@mui/material';
+
+function StylistsDesktop() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={4} alignItems="center">
+        {/* --- Left Column (Text) --- */}
+        <Grid item md={6}>
+          <Typography variant="h2" component="h1" gutterBottom>
+            Welcome to Sassy Hair
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+          </Typography>
+        </Grid>
+
+        {/* --- Right Column (Image Placeholder) --- */}
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: '100%',
+              height: 400,
+              backgroundColor: 'grey.200',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h6" color="text.secondary">
+              Main Photo Placeholder
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+
+export default StylistsDesktop;
+
+StylistsMobile.jsx
+// src/pages/home/HomeMobile.jsx
+import React from 'react';
+import { Typography, Stack, Box } from '@mui/material';
+
+function StylistsMobile() {
+  return (
+    // Stack is great for simple, one-directional layouts
+    <Stack spacing={4}>
+      {/* --- Image Placeholder (often comes first on mobile) --- */}
+      <Box
+        sx={{
+          width: '100%',
+          height: 300,
+          backgroundColor: 'grey.200',
+          borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          Main Photo Placeholder
+        </Typography>
+      </Box>
+
+      {/* --- Text Content --- */}
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Welcome to Sassy Hair
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+        </Typography>
+      </Box>
+    </Stack>
+  );
+}
+
+export default StylistsMobile;
+
+WorkWithUsDesktop.jsx
+// src/pages/home/HomeDesktop.jsx
+import React from 'react';
+import { Typography, Grid, Box } from '@mui/material';
+
+function WorkWithUsDesktop() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={4} alignItems="center">
+        {/* --- Left Column (Text) --- */}
+        <Grid item md={6}>
+          <Typography variant="h2" component="h1" gutterBottom>
+            Welcome to Sassy Hair
+          </Typography>
+          <Typography variant="h5" color="text.secondary">
+            Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+          </Typography>
+        </Grid>
+
+        {/* --- Right Column (Image Placeholder) --- */}
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: '100%',
+              height: 400,
+              backgroundColor: 'grey.200',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h6" color="text.secondary">
+              Main Photo Placeholder
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+
+export default WorkWithUsDesktop;
+
+WorkWithUsMobile.jsx
+// src/pages/home/HomeMobile.jsx
+import React from 'react';
+import { Typography, Stack, Box } from '@mui/material';
+
+function WorkWithUsMobile() {
+  return (
+    // Stack is great for simple, one-directional layouts
+    <Stack spacing={4}>
+      {/* --- Image Placeholder (often comes first on mobile) --- */}
+      <Box
+        sx={{
+          width: '100%',
+          height: 300,
+          backgroundColor: 'grey.200',
+          borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h6" color="text.secondary">
+          Main Photo Placeholder
+        </Typography>
+      </Box>
+
+      {/* --- Text Content --- */}
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Welcome to Sassy Hair
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Your journey to amazing hair starts here. We believe in creating styles that reflect your personality and lifestyle.
+        </Typography>
+      </Box>
+    </Stack>
+  );
+}
+
+export default WorkWithUsMobile;
+
+about.jsx
+
+ContactUs.jsx
+// src/pages/Home.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate views
+import ContactUsMobile from './contactus/ContactUsMobile.jsx';
+import ContactUsDesktop from './contactus/ContactUsDesktop.jsx';
+
+function ContactUs() {
+  const theme = useTheme();
+  // Check for medium screens and down
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Conditionally return the correct component based on the screen size
+  return isMobile ? <ContactUsMobile /> : <ContactUsDesktop />;
+}
+
+export default ContactUs;
+
+Home.jsx
+// src/pages/Home.jsx
+import React from 'react';
+import { Typography, Paper, Box, Grid } from '@mui/material';
+import Carousel from 'react-bootstrap/Carousel';
+
+// --- Data for our page ---
+const carouselImages = [
+  'https://images.pexels.com/photos/3993324/pexels-photo-3993324.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/2061820/pexels-photo-2061820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  
+];
+
+// --- The Unified Home Component ---
+function Home() {
+  return (
+    <Box sx={{ width: { xs: '95%', md: '85%' }, mt: 4, marginTop: 6 }}>
+      {/* --- Section 1: Carousel and "We are Sassy" text --- */}
+      <Paper elevation={3} sx={{ borderRadius: '16px', pb: { xs: 3, md: 5 }}}>
+        
+        {/* This new Box will control the carousel's width and centering */}
+        {/*<Box sx={{ width: '80%', margin: 'auto', }}>*/}
+          
+          {/*Box contains carpisel
+          <Box sx={{ borderRadius: '16px', overflow: 'hidden', boxShadow: 3, width:'95%', margin:'auto', marginTop: '3px'}}>*/}
+
+            <Carousel indicators={true} fade={true} interval={3000} sx={{marginTop:'6', borderRadius: '16pxsss'}}>
+
+              {carouselImages.map((img, index) => (
+                <Carousel.Item key={index}>
+
+                  <img
+                    className="d-block w-100"
+                    src={img}
+                    alt={`Slide ${index + 1}`}
+                    style={{ maxHeight: '400px', objectFit: 'cover' }}
+                  />
+
+                </Carousel.Item>
+              ))}
+            </Carousel>
+
+          {/*</Box>
+        </Box>*/}
+
+        <Box sx={{ pt: 4, textAlign: 'center'}}>
+
+          <Typography variant="h3" component="h1" sx={{ fontFamily: '"Lucida Handwriting", cursive' }}>
+            We are Sassy!
+          </Typography>
+          <Typography variant="h6" component="p">
+            Exceptionally Trained And Award Winning Stylists.
+            <br />
+            Unparalleled Service. Every Time.
+          </Typography>
+
+        </Box>
+      </Paper>
+
+      {/* --- Section 2: About Section --- */}
+      <Paper elevation={3} sx={{ p: 4, borderRadius: '16px', mt: 4 }}>
+        <Grid container spacing={5} alignItems="center">
+          <Grid item xs={12} md={6}>
+
+            <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom sx={{ fontFamily: '"Lucida Handwriting", cursive' }}>
+              About
+            </Typography>
+            <Typography variant="body1" color="text.secondary" paragraph>
+              Styles, trends, and fashions are forever changing...
+            </Typography>
+
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box
+              component="img"
+              src="https://placehold.co/600x450/EEE/31343C?text=About+Us"
+              alt="About Sassy Hair"
+              sx={{ width: '100%', borderRadius: '16px' }}
+            />
+          </Grid>
+        </Grid>
+      </Paper>
+    </Box>
+  );
+}
+
+export default Home;
+
+Photos.jsx
+// src/pages/Home.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate views
+import HomeDesktop from './home/HomeDesktop.jsx';
+import HomeMobile from './home/HomeMobile.jsx';
+import PhotosMobile from './photos/PhotosMobile.jsx';
+import PhotosDesktop from './photos/PhotosDesktop.jsx';
+
+function Photos() {
+  const theme = useTheme();
+  // Check for medium screens and down
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Conditionally return the correct component based on the screen size
+  return isMobile ? <PhotosMobile /> : <PhotosDesktop />;
+}
+
+export default Photos;
+
+Services.jsx
+// src/pages/Services.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate views
+import HomeDesktop from './home/HomeDesktop.jsx';
+import HomeMobile from './home/HomeMobile.jsx';
+import ServicesDesktop from './services/ServicesDesktop.jsx';
+
+function Services() {
+  const theme = useTheme();
+  // Check for medium screens and down
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Conditionally return the correct component based on the screen size
+  return isMobile ? <ServicesMobile /> : <ServicesDesktop />;
+}
+
+export default Services;
+
+Stylists.jsx
+// src/pages/Home.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate views
+import HomeDesktop from './home/HomeDesktop.jsx';
+import HomeMobile from './home/HomeMobile.jsx';
+import StylistsMobile from './stylists/StylistsMobile.jsx';
+import StylistsDesktop from './stylists/StylistsDesktop.jsx';
+
+function Stylists() {
+  const theme = useTheme();
+  // Check for medium screens and down
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Conditionally return the correct component based on the screen size
+  return isMobile ? <StylistsMobile /> : <StylistsDesktop />;
+}
+
+export default Stylists;
+
+WorkWithUs.jsx
+// src/pages/Home.jsx
+import React from 'react';
+import { useTheme, useMediaQuery } from '@mui/material';
+
+// Import the two separate views
+import HomeDesktop from './home/HomeDesktop.jsx';
+import HomeMobile from './home/HomeMobile.jsx';
+import WorkWithUsMobile from './workwithus/WorkWithUsMobile.jsx';
+
+function WorkWithUs() {
+  const theme = useTheme();
+  // Check for medium screens and down
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Conditionally return the correct component based on the screen size
+  return isMobile ? <WorkWithUsMobile /> : <WorkWithUsMobile />;
+}
+
+export default WorkWithUs;
+
+theme.js
+// src/theme/theme.js
+import { createTheme } from '@mui/material/styles';
+
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#D90166', // A vibrant magenta pink
+    },
+    secondary: {
+      main: '#f50057', // Another shade if you need it
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, sans-serif', // You can change the font later
+  },
+  shape: {
+    borderRadius: 16, // This will give components a rounded look
+  },
+});

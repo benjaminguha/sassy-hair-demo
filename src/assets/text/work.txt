@@ -1,0 +1,6 @@
+add text tip to book online
+adjust book online to go black instead of blue on hover
+
+change the carousel so it can adjust for size
+make it with a gap from the top
+add about page

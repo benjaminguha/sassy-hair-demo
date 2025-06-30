@@ -9,11 +9,15 @@ function HeaderDesktop({ navItems }) {
     <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 1 }}>
       <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
         {/* Left Logos Wrapped in Link */}
-        <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', gap: 2, textDecoration: 'none' }}>
+        <Box
+          component={Link}
+          to="/"
+          sx={{ display: 'flex', alignItems: 'center', gap: 1.5, textDecoration: 'none' }}
+        >
           <img
             src={sassyLogo}
             alt="Sassy Logo"
-            style={{ height: 60, width: 'auto' }}
+            style={{ height: 48, width: 'auto' }}
           />
           <Typography variant="h6" sx={{ color: 'black', fontWeight: 500 }}>
             |
@@ -22,26 +26,26 @@ function HeaderDesktop({ navItems }) {
             <img
               src={keuneLogo}
               alt="Keune Logo"
-              style={{ height: 35, width: 'auto' }}
+              style={{ height: 28, width: 'auto' }}
             />
           </Box>
         </Box>
 
-        {/* Navigation (excluding Home) */}
+        {/* Navigation */}
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
             gap: 1,
             ml: 'auto',
-            mr: 3,
+            mr: 2,
             flexWrap: 'nowrap',
             whiteSpace: 'nowrap',
             overflowX: 'auto',
-            maxWidth: '100%' // prevent wrapping but allow scrolling
+            maxWidth: '100%',
           }}
         >
-          {navItems.filter(item => item.label.toLowerCase() !== 'home').map((item) => (
+          {navItems.map((item) => (
             <Button
               key={item.label}
               component={Link}
@@ -55,8 +59,8 @@ function HeaderDesktop({ navItems }) {
                 whiteSpace: 'nowrap',
                 '&:hover': {
                   color: 'magenta',
-                  backgroundColor: '#e0e0e0'
-                }
+                  backgroundColor: '#e0e0e0',
+                },
               }}
             >
               {item.label}
@@ -64,13 +68,20 @@ function HeaderDesktop({ navItems }) {
           ))}
         </Box>
 
-        {/* Book Button */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        {/* Smaller Book Button */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Button
             variant="contained"
             color="primary"
-            sx={{ borderRadius: '20px' }}
             href="https://app.salonrunner.com/customer/login.htm?id=27134"
+            sx={{
+              borderRadius: '16px',
+              fontSize: '0.7rem',
+              px: 2,
+              py: 0.75,
+              textTransform: 'none',
+              fontWeight: 500,
+            }}
           >
             Book Online
           </Button>

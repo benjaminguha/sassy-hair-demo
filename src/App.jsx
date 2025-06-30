@@ -14,10 +14,13 @@ import { Helmet } from 'react-helmet';
 import sassyLogo from './images/sassy-logo.bmp';
 import SassyCollective from './pages/SassyCollective.jsx';
 import AdminPage from './pages/AdminPage.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx'
 
 function App() {
   return (
     <Router>
+      <ScrollToTop></ScrollToTop>
+      
       <Helmet>
         <title>Sassy Hair Salon | The Best Hairdressers & Stylists in Canberra</title>
         <link rel="icon" href={sassyLogo} type="image/bmp" />

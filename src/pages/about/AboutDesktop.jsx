@@ -4,6 +4,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import pinkProducts from '../../images/keune/pinkProducts.jpg';
 import CarouselDrive from '../../components/Carousel';
 
+import sassy3 from '../../images/sassy/sassy3.jpg'
+import sassy4 from '../../images/sassy/sassy4.jpg'
+
 
 
 function AboutDesktop() {
@@ -108,11 +111,11 @@ function AboutDesktop() {
             >
               <Box
                 component="img"
-                src="https://images.pexels.com/photos/3992878/pexels-photo-3992878.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={sassy4}
                 alt="Salon collage 1"
                 sx={{
                   width: '100%',
-                  height: '120px',
+                  height: '150px',
                   borderRadius: '12px',
                   objectFit: 'cover',
                   boxShadow: 2,
@@ -124,17 +127,17 @@ function AboutDesktop() {
               />
               <Box
                 component="img"
-                src="https://images.pexels.com/photos/3992929/pexels-photo-3992929.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={sassy3}
                 alt="Salon collage 2"
                 sx={{
                   width: '100%',
-                  height: '120px',
+                  height: '170px',
                   borderRadius: '12px',
                   objectFit: 'cover',
                   boxShadow: 4,
                   position: 'absolute',
-                  top: 60,
-                  left: 20,
+                  top: 90,
+                  left: 40,
                   zIndex: 2,
                 }}
               />

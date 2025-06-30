@@ -3,24 +3,11 @@ import { Box, Typography, Grid, Card, CardMedia } from '@mui/material';
 import { styled } from '@mui/system';
 import female7 from '../../images/keune/female7.jpg';
 
-// Updated stylist list
-const stylists = [
-  { name: 'Caroline', role: 'Independent Stylist', location: 'The Sassy Collective Weston', img: female7, blurb: '', type: 'contractor' },
-  { name: 'Cindy', role: 'Senior Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Daniel', role: 'Senior Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Sadie', role: 'Academy Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Shanae', role: 'Junior Academy Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Shari', role: 'Independent Stylist', location: 'The Sassy Collective Weston', img: female7, blurb: '', type: 'contractor' },
-  { name: 'Zoe', role: 'Senior Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-];
+import stylists from '../../data/stylists.js';
 
 // Sort by type, then alphabetically by name
 const typeOrder = { employed: 0, contractor: 1 };
-const sortedStylists = [...stylists].sort((a, b) => {
-  const typeComparison = (typeOrder[a.type] ?? 99) - (typeOrder[b.type] ?? 99);
-  if (typeComparison !== 0) return typeComparison;
-  return a.name.localeCompare(b.name);
-});
+const sortedStylists = [...stylists].sort((a, b) => a.name.localeCompare(b.name));
 
 // Styled components
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -69,37 +56,44 @@ const HoverOverlay = styled(Box)(({ theme }) => ({
 
 function StylistsDesktop() {
   return (
-    <Box sx={{ px: 4, pt: 10, pb: 6 }}>
+    <Box sx={{ px: 4, pt: 10, pb: 6, width: '100%' }}>
       <Typography variant="h4" gutterBottom textAlign="center">
         Meet Our Stylists
       </Typography>
       <Grid container spacing={4} justifyContent="center">
         {sortedStylists.map((stylist, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <StyledCard>
-              <Box sx={{ position: 'relative' }}>
-                <CardMedia
-                  component="img"
-                  image={stylist.img}
-                  alt={stylist.name}
-                  height="300"
-                  sx={{ objectFit: 'cover' }}
-                />
-                <NameOverlay>
-                  <Typography variant="h6">{stylist.name}</Typography>
-                </NameOverlay>
-                <HoverOverlay className="hoverContent">
-                  <Typography variant="subtitle1" fontWeight="bold">
-                    {stylist.role} – {stylist.location}
-                  </Typography>
-                  {stylist.blurb && (
-                    <Typography variant="body2" mt={1}>
-                      {stylist.blurb}
+            <a
+              href="https://app.salonrunner.com/customer/login.htm?id=27134"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <StyledCard>
+                <Box sx={{ position: 'relative' }}>
+                  <CardMedia
+                    component="img"
+                    image={stylist.img}
+                    alt={stylist.name}
+                    height="300"
+                    sx={{ objectFit: 'cover' }}
+                  />
+                  <NameOverlay>
+                    <Typography variant="h6">{stylist.name}</Typography>
+                  </NameOverlay>
+                  <HoverOverlay className="hoverContent">
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      {stylist.role} – {stylist.location}
                     </Typography>
-                  )}
-                </HoverOverlay>
-              </Box>
-            </StyledCard>
+                    {stylist.blurb && (
+                      <Typography variant="body2" mt={1}>
+                        {stylist.blurb}
+                      </Typography>
+                    )}
+                  </HoverOverlay>
+                </Box>
+              </StyledCard>
+            </a>
           </Grid>
         ))}
       </Grid>

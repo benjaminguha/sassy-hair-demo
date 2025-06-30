@@ -14,8 +14,7 @@ const navItems = [
   { label: 'Stylists', path: '/stylists' },
   { label: 'Photos', path: '/photos' },
   { label: 'Contact Us', path: '/contact' },
-  { label: 'The Sassy Collective', path: '/sassy-collective' },
-  {label: 'A', path:'/admin'}
+  { label: 'The Sassy Collective', path: '/sassy-collective' }
 ];
 
 

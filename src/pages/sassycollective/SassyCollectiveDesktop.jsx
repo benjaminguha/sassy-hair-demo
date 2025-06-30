@@ -14,78 +14,58 @@ function SassyCollectiveDesktop() {
         boxSizing: 'border-box',
       }}
     >
-      <Box sx={{ px: 4 }}>
+      <Box sx={{ px: 0 }}>
         <Paper
           elevation={3}
           sx={{
             p: 6,
-            borderRadius: '20px',
+            borderRadius: '20px', // <-- Rounded corners here
             border: '3px solid #ccc',
-            maxWidth: '1400px',
-            mx: 'auto',
+            width: '100%',
+            boxSizing: 'border-box',
+            mx: 'auto', // Center it just in case it’s constrained
           }}
         >
-          <Box sx={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {/* Left: Text Section */}
-            <Box
-              sx={{
-                width: { xs: '100%', md: '60%' },
-                minWidth: '300px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-              }}
-            >
-              <Typography variant="pageHeader" gutterBottom>
-                Join the Sassy Hair Family
-              </Typography>
+          <Box
+            sx={{
+              width: '100%',
+              px: { xs: 2, md: 8 },
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+            }}
+          >
+            <Typography variant="pageHeader" gutterBottom>
+              The Sassy Collective
+            </Typography>
 
-              <Typography variant="sectionHeader" gutterBottom>
-                Ready to take the next step in your career?
-              </Typography>
+            <Typography variant="sectionHeader" gutterBottom>
+              Your Chair. Your Clients. Our Space.
+            </Typography>
 
-              <Typography variant="text" paragraph>
-                We’re always on the lookout for talented and passionate stylists, apprentices, and salon assistants to join our friendly and professional team.
-              </Typography>
-              <Typography variant="text" paragraph>
-                At Sassy Hair, we believe in creating a supportive and inspiring environment that helps our team grow and flourish. Whether you're a seasoned stylist or just starting your career, we offer training, mentorship, and a great salon culture.
-              </Typography>
-              <Typography variant="text" paragraph>
-                If you're ready to take the next step in your hairdressing journey, we'd love to hear from you!
-              </Typography>
+            <Typography variant="text" paragraph>
+              Looking for a professional, welcoming, and stylish space to grow your hairdressing business?
+              At Sassy Hair, we offer chair rental opportunities for experienced stylists ready to run their own business on their own terms.
+            </Typography>
 
-              <Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  href="mailto:appointments@sassyhair.com.au?subject=Join%20the%20Sassy%20Hair%20Team"
-                  sx={{ fontWeight: 'bold', borderRadius: '20px', mt: 2 }}
-                >
-                  Apply Now
-                </Button>
-              </Box>
-            </Box>
+            <Typography variant="text" paragraph>
+              Whether you're an established stylist with your own clientele or looking to move toward greater independence, we provide the environment and support to make it happen. Enjoy the freedom of managing your own schedule while working alongside a collaborative team in a beautifully maintained salon.
+            </Typography>
 
-            {/* Right: Optional Visual Block */}
-            <Box
-              sx={{
-                flex: 1,
-                minWidth: '300px',
-                maxWidth: '400px',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: 3,
-                alignSelf: 'flex-start',
-                backgroundColor: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                p: 2,
-              }}
-            >
-              <Typography variant="body1" color="text.secondary" align="center">
-                We'd love to meet people who are excited about creativity, culture, and growth. If that’s you, get in touch!
-              </Typography>
+            <Typography variant="text" paragraph>
+              If you're interested in learning more about how it works, we'd love to hear from you.
+              Let's chat about your future at The Sassy Collective or Sassy Hair Pearce.
+            </Typography>
+
+            <Box>
+              <Button
+                variant="contained"
+                color="primary"
+                href="mailto:appointments@sassyhair.com.au?subject=Rent%20a%20Chair%20at%20Sassy%20Hair"
+                sx={{ fontWeight: 'bold', borderRadius: '20px', mt: 2 }}
+              >
+                Work With Us
+              </Button>
             </Box>
           </Box>
         </Paper>

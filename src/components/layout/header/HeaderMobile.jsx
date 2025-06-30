@@ -48,6 +48,29 @@ function HeaderMobile({ navItems }) {
         </Box>
       </Box>
       <List>
+        {/* Home button manually added */}
+        <ListItem
+          component={Link}
+          to="/"
+          sx={{
+            justifyContent: 'center',
+            borderRadius: '8px',
+            margin: '8px',
+            textAlign: 'center',
+            color: 'black',
+            '&:hover': {
+              color: 'magenta',
+              backgroundColor: '#e0e0e0',
+            },
+            '&:active': {
+              color: 'magenta'
+            },
+          }}
+        >
+          <ListItemText primary="Home" />
+        </ListItem>
+
+        {/* Render all other items except home */}
         {navItems
           .filter(item => item.label.toLowerCase() !== 'home')
           .map((item) => (

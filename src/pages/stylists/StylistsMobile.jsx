@@ -3,24 +3,15 @@ import { Box, Typography, Card, CardMedia, CardContent, Grid } from '@mui/materi
 import { styled } from '@mui/system';
 import female7 from '../../images/keune/female7.jpg';
 
+import stylists from '../../data/stylists.js';
+
 // Updated stylist list
-const stylists = [
-  { name: 'Caroline', role: 'Independent Stylist', location: 'The Sassy Collective Weston', img: female7, blurb: '', type: 'contractor' },
-  { name: 'Cindy', role: 'Senior Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Daniel', role: 'Senior Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Sadie', role: 'Academy Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Shanae', role: 'Junior Academy Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-  { name: 'Shari', role: 'Independent Stylist', location: 'The Sassy Collective Weston', img: female7, blurb: '', type: 'contractor' },
-  { name: 'Zoe', role: 'Senior Stylist', location: 'Sassy Hair Pearce', img: female7, blurb: '', type: 'employed' },
-];
+
 
 // Sort by type, then alphabetically by first name
 const typeOrder = { employed: 0, contractor: 1 };
-const sortedStylists = [...stylists].sort((a, b) => {
-  const typeComparison = (typeOrder[a.type] ?? 99) - (typeOrder[b.type] ?? 99);
-  if (typeComparison !== 0) return typeComparison;
-  return a.name.localeCompare(b.name);
-});
+const sortedStylists = [...stylists].sort((a, b) => a.name.localeCompare(b.name));
+
 
 // Styled components
 const StyledCard = styled(Card)(({ theme }) => ({

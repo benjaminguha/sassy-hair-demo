@@ -13,6 +13,7 @@ function SassyCollectiveMobile() {
         py: { xs: 4, sm: 6 },
         boxSizing: 'border-box',
         overflowX: 'hidden',
+        bgcolor: '#E0E0E0',
       }}
     >
       <Box sx={{ width: '100%', maxWidth: '1400px' }}>
@@ -23,31 +24,43 @@ function SassyCollectiveMobile() {
           gutterBottom
           sx={{ fontFamily: '"Lucida Handwriting", cursive' }}
         >
-          Join the Sassy Hair Family
+          The Sassy Collective
         </Typography>
 
-        <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
+        <Paper
+          elevation={3}
+          sx={{
+            p: 3,
+            borderRadius: '20px',
+            border: '2px solid #ccc',
+            bgcolor: '#fff',
+          }}
+        >
           <Typography variant="body1" sx={{ mb: 2, fontWeight: 'bold' }}>
-            Passionate about hair and looking for a fresh start?
+            Your Chair. Your Clients. Our Space.
           </Typography>
+
           <Typography variant="body2" sx={{ mb: 2 }}>
-            We’re always looking for creative, motivated team members—from senior stylists to first-year apprentices.
+            Are you an experienced stylist ready to grow your business independently?
+            At Sassy Hair, we offer rental chairs in a beautifully maintained, vibrant salon environment.
           </Typography>
+
           <Typography variant="body2" sx={{ mb: 2 }}>
-            At Sassy Hair, you’ll join a welcoming team that values growth, education, and making clients feel fabulous.
+            Enjoy the freedom to manage your own clients and schedule, while working among a welcoming and collaborative team.
           </Typography>
+
           <Typography variant="body2" sx={{ mb: 4 }}>
-            Ready to take the next step? Let us know why you’d be a great fit!
+            If you're interested in how it works or want to see the space, get in touch today. Let’s talk about your future at Sassy Pearce or The Sassy Collective Weston.
           </Typography>
 
           <Box textAlign="center">
             <Button
               variant="contained"
               color="primary"
-              href="mailto:appointments@sassyhair.com.au?subject=Join%20the%20Sassy%20Hair%20Team"
-              sx={{ fontWeight: 'bold' }}
+              href="mailto:appointments@sassyhair.com.au?subject=Rent%20a%20Chair%20at%20Sassy%20Hair"
+              sx={{ fontWeight: 'bold', borderRadius: '20px' }}
             >
-              Apply Now
+              Work With Us
             </Button>
           </Box>
         </Paper>

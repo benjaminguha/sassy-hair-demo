@@ -12,6 +12,10 @@ import female6 from '../images/keune/female6.jpg';
 import female7 from '../images/keune/female7.jpg';
 import female8 from '../images/keune/female8.jpg';
 import female9 from '../images/keune/female9.jpg';
+import sassy1 from "../images/sassy/sassy1.jpg";
+import sassy2 from "../images/sassy/sassy2.jpg";
+import sassy4 from "../images/sassy/sassy4.jpg";
+import sassy5 from "../images/sassy/sassy5.jpg";
 
 const localImages = [
   female1,
@@ -23,12 +27,18 @@ const localImages = [
   female7,
   female8,
   female9,
+  sassy1,
+  sassy2,
+  sassy4,
+  sassy5,
 ];
 
 function CarouselDrive({ height = '450px', borderRadius = '16px' }) {
+  const shuffled = [...localImages].sort(() => Math.random() - 0.5);
+
   return (
     <Carousel fade indicators={false} interval={4000}>
-      {localImages.map((img, index) => (
+      {shuffled.map((img, index) => (
         <Carousel.Item key={index}>
           <img
             className="d-block w-100"
@@ -37,6 +47,7 @@ function CarouselDrive({ height = '450px', borderRadius = '16px' }) {
             style={{
               height: height,
               objectFit: 'cover',
+              objectPosition: 'center',
               borderRadius: borderRadius,
             }}
           />
@@ -45,5 +56,6 @@ function CarouselDrive({ height = '450px', borderRadius = '16px' }) {
     </Carousel>
   );
 }
+
 
 export default CarouselDrive;

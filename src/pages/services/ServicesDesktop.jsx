@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -69,135 +69,122 @@ const servicesData = [
 ];
 
 function ServicesDesktop() {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const handleChange = (index) => (_, isExpanded) => {
+    setExpandedIndex(isExpanded ? index : null);
+  };
+
   return (
     <Box
       sx={{
-        width: '100vw',
+        width: '100%',
         minHeight: '100vh',
         bgcolor: '#f5f5f5',
         overflowX: 'hidden',
         py: 6,
+        px: { xs: 2, md: 4 },
+        boxSizing: 'border-box',
       }}
     >
-      <Box
+      <Paper
+        elevation={3}
         sx={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
+          maxWidth: '1200px',
+          mx: 'auto',
+          px: { xs: 2, md: 6 },
+          py: 6,
+          borderRadius: 3,
         }}
       >
-        <Paper
-          elevation={3}
+        <Typography variant="pageHeader" gutterBottom>
+          Services
+        </Typography>
+
+        <Box
           sx={{
-            width: '100%',
-            maxWidth: '1400px',
-            px: { xs: 2, md: 6 },
-            py: 6,
-            borderRadius: 0,
-            boxSizing: 'border-box',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 6,
+            alignItems: 'flex-start',
           }}
         >
-          <Typography variant="pageHeader" gutterBottom>
-            Services
-          </Typography>
+          {/* === LEFT: Description === */}
+          <Box sx={{ flex: 1 }}>
+            <Typography variant="text" paragraph>
+              All prices apply to Sassy Hair Pearce and are a starting point...
+            </Typography>
+            <Typography variant="text" paragraph>
+              Our services are based on the following length types:
+            </Typography>
 
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              gap: 6,
-              alignItems: 'flex-start',
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography variant="text" paragraph>
-                All prices apply to Sassy Hair Pearce and are a starting point. Pricing will be dependent on your hair's condition, the amount of time taken , products used, and the lever of expertise required to achieve your desired look.
-              </Typography>
-
-              <Typography variant="text" paragraph>
-                Our services are based on the following length types:
-              </Typography>
-
-              <Box component="ul" sx={{ pl: 2, mt: 1 }}>
-                <li>
-                  <Typography component="span" variant="text">
-                    Short – above the jawline
-                  </Typography>
-                </li>
-                <li>
-                  <Typography component="span" variant="text">
-                    Medium – above the shoulders
-                  </Typography>
-                </li>
-                <li>
-                  <Typography component="span" variant="text">
-                    Long – above the shoulder blades
-                  </Typography>
-                </li>
-                <li>
-                  <Typography component="span" variant="text">
-                    Extra Long – below the shoulder blades
-                  </Typography>
-                </li>
-              </Box>
-
-              <Typography variant="text" paragraph>
-                Quotes cannot be given over the phone. However, we do offer appointments for a
-                complimentary in-salon client consultation to discuss your options.
-              </Typography>
-
-              <Typography variant="text" paragraph>
-                All services can be quoted before the commencement of a service. The prices listed
-                include GST and are subject to change without notification.
-              </Typography>
-
-              <Typography variant="text" paragraph>
-                Please note that due to the nature of their independence, any stylists working at The
-                Sassy Collective are responsible for setting their own services and pricing. Please
-                speak with them directly regarding quotes for their services.
-              </Typography>
+            <Box component="ul" sx={{ pl: 2, mt: 1 }}>
+              <li><Typography variant="text">Short – above the jawline</Typography></li>
+              <li><Typography variant="text">Medium – above the shoulders</Typography></li>
+              <li><Typography variant="text">Long – above the shoulder blades</Typography></li>
+              <li><Typography variant="text">Extra Long – below the shoulder blades</Typography></li>
             </Box>
 
-            <Box sx={{ flex: 1, pt: { md: '34px', xs: 0 } }}>
-              {servicesData.map((section, index) => (
-                <Slide in direction="left" timeout={500 + index * 100} key={index}>
-                  <Accordion sx={{ mb: 2 }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                      <Typography variant="pinkHeader" color="primary">
-                        {section.category}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      {section.services.map((service, idx) => (
-                        <Box key={idx} sx={{ mb: 2 }}>
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <Typography variant="text">{service.name}</Typography>
-                            <Typography variant="text" color="text.secondary">
-                              {service.price}
-                            </Typography>
-                          </Box>
-                          {service.description && (
-                            <Typography variant="text" color="text.secondary" sx={{ fontSize: '0.85rem' }}>
-                              {service.description}
-                            </Typography>
-                          )}
-                        </Box>
-                      ))}
-                    </AccordionDetails>
-                  </Accordion>
-                </Slide>
-              ))}
+            <Typography variant="text" paragraph>
+              Quotes cannot be given over the phone...
+            </Typography>
 
-              <Typography variant="text" mt={2}>
-                <em>
-                  Our pricing is a genuine reflection of our commitment to continual training,
-                  education, and the high-quality Keune products we use.
-                </em>
-              </Typography>
-            </Box>
+            <Typography variant="text" paragraph>
+              All services can be quoted before the commencement...
+            </Typography>
+
+            <Typography variant="text" paragraph>
+              Stylists at The Sassy Collective set their own prices...
+            </Typography>
           </Box>
-        </Paper>
-      </Box>
+
+          {/* === RIGHT: Accordion List === */}
+          <Box sx={{ flex: 1, pt: { md: '34px', xs: 0 } }}>
+            {servicesData.map((section, index) => (
+              <Slide in direction="left" timeout={500 + index * 100} key={index}>
+                <Accordion
+                  expanded={expandedIndex === index}
+                  onChange={handleChange(index)}
+                  sx={{ mb: 2 }}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography variant="pinkHeader" color="primary">
+                      {section.category}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {section.services.map((service, idx) => (
+                      <Box key={idx} sx={{ mb: 2 }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <Typography variant="text">{service.name}</Typography>
+                          <Typography variant="text" color="text.secondary">
+                            {service.price}
+                          </Typography>
+                        </Box>
+                        {service.description && (
+                          <Typography
+                            variant="text"
+                            color="text.secondary"
+                            sx={{ fontSize: '0.85rem' }}
+                          >
+                            {service.description}
+                          </Typography>
+                        )}
+                      </Box>
+                    ))}
+                  </AccordionDetails>
+                </Accordion>
+              </Slide>
+            ))}
+
+            <Typography variant="text" mt={2}>
+              <em>
+                Our pricing is a genuine reflection of our commitment to continual training...
+              </em>
+            </Typography>
+          </Box>
+        </Box>
+      </Paper>
     </Box>
   );
 }
